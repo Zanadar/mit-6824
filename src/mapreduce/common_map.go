@@ -21,11 +21,7 @@ func doMap(
 	b, _ := ioutil.ReadFile(inFile)
 	kv := mapF(inFile, string(b))
 
-	bf := [][]KeyValue{}
-
-	for i := 0; i < nReduce; i++ {
-		bf = append(bf, []KeyValue{})
-	}
+	bf := make([][]KeyValue, nReduce)
 
 	for _, v := range kv {
 		curr := ihash(v.Key) % nReduce
